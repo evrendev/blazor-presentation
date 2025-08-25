@@ -34,42 +34,29 @@ The presentation covers Blazor fundamentals, hosting models, data binding, and c
   - CORS configuration for cross-origin requests
   - OpenAPI documentation support
 
-## 📋 Slide Content
+## 📋 Presentation Content
 
-The presentation includes 19 slides covering:
+The presentation includes the following 19 slides:
 
-1. **Introduction**
-
-   - Explaining Blazor
-   - What We'll Cover
-
-2. **Core Concepts**
-
-   - What is Blazor? (Easy & Technical Explanations)
-   - Hosting Models
-   - Server vs WebAssembly
-
-3. **Technical Deep Dive**
-
-   - Running on Server
-   - Running in Browser
-   - Mixing Render Modes
-
-4. **Comparisons & Advantages**
-
-   - vs Traditional HTML
-   - vs JavaScript Frameworks
-   - Main Differences
-
-5. **Advanced Topics**
-
-   - Middleware Pipeline
-   - Data Binding Magic
-   - How Binding Works
-
-6. **Conclusion**
-   - Summary
-   - Q&A
+1. Explaining Blazor
+2. What We'll Cover
+3. What is Blazor? (An Easy Explanation)
+4. What is Blazor? (The Technical Side)
+5. How Blazor Runs: Hosting Models
+6. Running on the Server
+7. Running in the Browser
+8. Server vs. WebAssembly (WASM)
+9. The Next Step: Mixing Render Modes
+10. Blazor vs. Old HTML Pages
+11. Blazor vs. JavaScript Frameworks
+12. Main Differences
+13. What is Middleware?
+14. The Middleware Pipeline in Action
+15. The Magic of Data Binding
+16. How Data Binding Works
+17. How @bind Works Inside
+18. Summary
+19. Questions?
 
 ## 🚀 Getting Started
 
@@ -110,14 +97,14 @@ The presentation includes 19 slides covering:
    dotnet run
    ```
 
-   The API will start at `https://localhost:7001`
+   The API will start at `https://localhost:3001`
 
 2. **Start the Frontend (Terminal 2)**
    ```bash
    cd Frontend
    dotnet run
    ```
-   The frontend will start at `https://localhost:7002`
+   The frontend will start at `https://localhost:3000`
 
 #### Option 2: Using Visual Studio
 
@@ -127,9 +114,9 @@ The presentation includes 19 slides covering:
 
 ### Development URLs
 
-- **Frontend**: https://localhost:7002
-- **API**: https://localhost:7001
-- **SignalR Hub**: https://localhost:7001/slideHub
+- **Frontend**: https://localhost:3000
+- **API**: https://localhost:3001
+- **SignalR Hub**: https://localhost:3001/slideHub
 
 ## 🛠️ Development
 
@@ -212,19 +199,11 @@ The application uses SignalR for:
 
 The application can be containerized using Docker. Create Dockerfiles for both projects and use docker-compose for orchestration.
 
-## 🧪 Testing
-
-Run tests using:
-
-```bash
-dotnet test
-```
-
 ## 📄 API Documentation
 
 When running in development mode, API documentation is available at:
 
-- OpenAPI: `https://localhost:7001/openapi`
+- OpenAPI: `https://localhost:3001/openapi`
 
 ## 🤝 Contributing
 
