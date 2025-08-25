@@ -1,8 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-
-namespace SlideApi.Controllers
+namespace PublicApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

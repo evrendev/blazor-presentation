@@ -1,6 +1,0 @@
-@SlideApi_HostAddress = http://localhost:5138
-
-GET {{SlideApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

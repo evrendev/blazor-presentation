@@ -26,6 +26,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigins");
 app.MapControllers();
-app.MapHub<SlideApi.SlideHub>("/slideHub");
+app.MapHub<PublicApi.SlideHub>("/slideHub");
 
 app.Run();

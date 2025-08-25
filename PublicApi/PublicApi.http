@@ -1,0 +1,6 @@
+@PublicApi_HostAddress = https://localhost:3001
+
+GET {{PublicApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

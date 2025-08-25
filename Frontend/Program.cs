@@ -1,4 +1,4 @@
-using SlideFrontend.Services;
+using Frontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

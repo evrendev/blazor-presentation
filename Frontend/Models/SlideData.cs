@@ -1,4 +1,4 @@
-namespace SlideFrontend.Models
+namespace Frontend.Models
 {
     public class SlideData
     {

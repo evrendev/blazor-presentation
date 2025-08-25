@@ -1,7 +1,7 @@
-using SlideFrontend.Components.Slides;
-using SlideFrontend.Models;
+using Frontend.Components.Slides;
+using Frontend.Models;
 
-namespace SlideFrontend.Services
+namespace Frontend.Services
 {
     public class SlideService
     {
