@@ -1,0 +1,53 @@
+@page "/slide"
+@using Microsoft.AspNetCore.SignalR.Client
+
+<h3>Aktif Slide: @slideNumber</h3>
+
+<h4>@IsConnected</h4>
+
+<p>@apiBaseUrl</p>
+
+@code {
+    private HubConnection? hubConnection;
+    private int slideNumber;
+    private string? apiBaseUrl;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        if (env == "Development")
+        {
+            apiBaseUrl = "https://localhost:3001";
+        }
+        else
+        {
+            apiBaseUrl = "https://api.evren.dev";
+        }
+
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl($"{apiBaseUrl}/slideHub")
+        .WithAutomaticReconnect()
+        .Build();
+
+        hubConnection.On<int>("ReceiveSlideNumber", async (num) =>
+        {
+            slideNumber = num;
+            await InvokeAsync(StateHasChanged);
+        });
+
+        try
+        {
+            await hubConnection.StartAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"SignalR bağlantı hatası: {ex.Message}");
+        }
+    }
+
+    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; } = default!;
+}

@@ -1,0 +1,9 @@
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/SlideApi
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/appsettings.Development.json
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/appsettings.json
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/SlideApi.dll
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/SlideApi.deps.json
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/SlideApi.runtimeconfig.json
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/SlideApi.pdb
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/Microsoft.AspNetCore.OpenApi.dll
+/Users/evrenyeniev/Projects/repositories/blazor-slide/publish/backend/Microsoft.OpenApi.dll
