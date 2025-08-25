@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SlideApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8c7967bd20afd623035f3f511e352e8a33ee8dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("SlideApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SlideApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

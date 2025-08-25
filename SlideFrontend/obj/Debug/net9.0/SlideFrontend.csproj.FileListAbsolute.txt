@@ -31,10 +31,7 @@
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/SlideFrontend.MvcApplicationPartsAssemblyInfo.cache
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/SlideFrontend.RazorAssemblyInfo.cache
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/SlideFrontend.RazorAssemblyInfo.cs
-/Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/scopedcss/Shared/MainLayout.razor.rz.scp.css
-/Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/scopedcss/Shared/NavMenu.razor.rz.scp.css
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/scopedcss/bundle/SlideFrontend.styles.css
-/Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/scopedcss/projectbundle/SlideFrontend.bundle.scp.css
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/ljtm6z2pja-bpk8xqwxhs.gz
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/3xahnevrz2-8inm30yfxf.gz
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/wzt2umw672-cmapd0fi15.gz
@@ -42,8 +39,6 @@
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/hot2npbanl-sjnzgf7e1h.gz
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/9l58gtnxc7-5bzwdl5l6x.gz
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/9zyhpy7gan-zh9s866nx2.gz
-/Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/j9nsro9ta3-uau79yyedn.gz
-/Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/compressed/0bssnxdoi6-uau79yyedn.gz
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/staticwebassets.build.json
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/staticwebassets.build.json.cache
 /Users/evrenyeniev/Projects/repositories/blazor-slide/SlideFrontend/obj/Debug/net9.0/staticwebassets.development.json
