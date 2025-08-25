@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.SignalR;
+
 namespace PublicApi
 {
     public class SlideHub : Hub
