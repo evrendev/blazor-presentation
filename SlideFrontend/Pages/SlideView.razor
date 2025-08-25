@@ -1,19 +1,73 @@
 @page "/slide"
-@using Microsoft.AspNetCore.SignalR.Client
+@inject SlideService SlideService
+@implements IAsyncDisposable
 
-<h3>Aktif Slide: @slideNumber</h3>
+<main class="flex-grow flex flex-col justify-center items-center p-4 md:p-8">
+    @if (slides.Any() && currentSlideIndex >= 0 && currentSlideIndex < slides.Count)
+    {
+        <div class="slide w-full h-full flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100 active">
+            <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+                @((MarkupString)slides[currentSlideIndex].Content)
+            </div>
 
-<h4>@IsConnected</h4>
+            <div
+                class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+                @((MarkupString)slides[currentSlideIndex].Notes)
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-600">Loading...</h3>
+            <p class="text-gray-500 mt-2">SignalR Connection Status: @(IsConnected ? "Connected" : "Disconnected")</p>
+            <p class="text-gray-500 mt-1">Total Slides: @slides.Count</p>
+            <p class="text-gray-500 mt-1">Current Index: @currentSlideIndex</p>
+            @if (slides.Any())
+            {
+                <p class="text-green-600 mt-2">Slides loaded, but not displaying.</p>
+            }
+            else
+            {
+                <p class="text-red-600 mt-2">Slides could not be loaded!</p>
+            }
+        </div>
+    }
+</main>
 
-<p>@apiBaseUrl</p>
+<footer
+    class="bg-white border-t border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between shadow-md print:hidden gap-4 sm:gap-0">
+    <div class="text-sm text-gray-600 order-2 sm:order-1">
+        <span>@(currentSlideIndex + 1)</span> / <span>@slides.Count</span>
+    </div>
+    <div class="flex items-center gap-4 order-1 sm:order-2">
+        <button @onclick="PreviousSlide" disabled="@(currentSlideIndex <= 0)"
+            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Previous
+        </button>
+        <button @onclick="NextSlide" disabled="@(currentSlideIndex >= slides.Count - 1)"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Next
+        </button>
+    </div>
+    <div class="text-sm text-gray-500 order-3 sm:order-3 text-center sm:text-right hidden">
+        <button @onclick="ToggleNotes"
+            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+            @(showNotes ? "Hide Notes" : "Show Notes")
+        </button>
+    </div>
+</footer>
 
 @code {
     private HubConnection? hubConnection;
-    private int slideNumber;
+    private int currentSlideIndex = 0;
+    private List<SlideData> slides = new();
+    private bool showNotes = false;
     private string? apiBaseUrl;
 
     protected override async Task OnInitializedAsync()
     {
+        slides = SlideService.GetSlides();
 
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         if (env == "Development")
@@ -30,10 +84,14 @@
         .WithAutomaticReconnect()
         .Build();
 
-        hubConnection.On<int>("ReceiveSlideNumber", async (num) =>
+        hubConnection.On<int>("ReceiveSlideNumber", async (slideNumber) =>
         {
-            slideNumber = num;
-            await InvokeAsync(StateHasChanged);
+            var newIndex = slideNumber - 1;
+            if (newIndex >= 0 && newIndex < slides.Count)
+            {
+                currentSlideIndex = newIndex;
+                await InvokeAsync(StateHasChanged);
+            }
         });
 
         try
@@ -42,7 +100,83 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"SignalR bağlantı hatası: {ex.Message}");
+            Console.WriteLine($"SignalR Connection Error: {ex.Message}");
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task PreviousSlide()
+    {
+        if (currentSlideIndex > 0)
+        {
+            currentSlideIndex--;
+            await SendSlideUpdate();
+        }
+    }
+
+    private async Task NextSlide()
+    {
+        if (currentSlideIndex < slides.Count - 1)
+        {
+            currentSlideIndex++;
+            await SendSlideUpdate();
+        }
+    }
+
+    private void ToggleNotes()
+    {
+        showNotes = !showNotes;
+    }
+
+    private async Task SendSlideUpdate()
+    {
+        if (IsConnected && hubConnection != null)
+        {
+            try
+            {
+                await hubConnection.SendAsync("SendSlideNumber", currentSlideIndex + 1);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Update error: {ex.Message}");
+            }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("addEventListener", "keydown", DotNetObjectReference.Create(this), "handleKeyDown");
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleKeyDown(string key)
+    {
+        switch (key)
+        {
+            case "ArrowRight":
+            case " ":
+                await NextSlide();
+                break;
+            case "ArrowLeft":
+                await PreviousSlide();
+                break;
+            case "n":
+            case "N":
+                ToggleNotes();
+                StateHasChanged();
+                break;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection != null)
+        {
+            await hubConnection.DisposeAsync();
         }
     }
 
@@ -50,4 +184,7 @@
 
     [Inject]
     NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    IJSRuntime JS { get; set; } = default!;
 }

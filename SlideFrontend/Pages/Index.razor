@@ -1,3 +1,11 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Blazor Presentation</PageTitle>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("/slide");
+    }
+}
