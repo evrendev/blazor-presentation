@@ -71,7 +71,7 @@ The presentation includes the following 19 slides:
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   gh repo clone evrendev/blazor-presentation
    cd blazor-slide
    ```
 
