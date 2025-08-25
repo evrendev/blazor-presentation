@@ -92,9 +92,13 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script>
-        window.addEventListener = function (event, component, method) {
-            document.addEventListener(event, function (e) {
-                component.invokeMethodAsync(method, e.key);
+        window.addKeydownListener = function (dotNetHelper) {
+            document.addEventListener('keydown', function (e) {
+                try {
+                    dotNetHelper.invokeMethodAsync('HandleKeyDown', e.key);
+                } catch (error) {
+                    console.error('Error calling .NET method:', error);
+                }
             });
         };
     </script>

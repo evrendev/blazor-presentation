@@ -144,11 +144,14 @@
         }
     }
 
+    private DotNetObjectReference<SlideView>? dotNetHelper;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("addEventListener", "keydown", DotNetObjectReference.Create(this), "handleKeyDown");
+            dotNetHelper = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("addKeydownListener", dotNetHelper);
         }
     }
 
@@ -178,6 +181,7 @@
         {
             await hubConnection.DisposeAsync();
         }
+        dotNetHelper?.Dispose();
     }
 
     public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
