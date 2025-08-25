@@ -1,69 +1,56 @@
 @page "/slide"
 @inject SlideService SlideService
 @implements IAsyncDisposable
+@using Microsoft.AspNetCore.Components.Web
 
-<main class="flex-grow flex flex-col justify-center items-center p-4 md:p-8">
-    @if (slides.Any() && currentSlideIndex >= 0 && currentSlideIndex < slides.Count)
-    {
-        <div class="slide w-full h-full flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100 active">
-            <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
-                @((MarkupString)slides[currentSlideIndex].Content)
+<div class="h-screen flex flex-col bg-gray-100">
+    <main class="flex-grow flex flex-col justify-center items-center p-4 md:p-8">
+        @if (slides.Any() && currentSlideIndex >= 0 && currentSlideIndex < slides.Count)
+        {
+            <DynamicComponent Type="slides[currentSlideIndex].ComponentType" Parameters="slideParameters" />
+        }
+        else
+        {
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-600">Loading...</h3>
+                <p class="text-gray-500 mt-2">SignalR Connection: @(IsConnected ? "Connected" : "Disconnected")</p>
+                <p class="text-gray-500 mt-1">Total Slides: @slides.Count</p>
+                <p class="text-gray-500 mt-1">Current Index: @currentSlideIndex</p>
             </div>
+        }
+    </main>
 
-            <div
-                class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
-                @((MarkupString)slides[currentSlideIndex].Notes)
-            </div>
+    <footer
+        class="bg-white border-t border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between shadow-md print:hidden gap-4 sm:gap-0">
+        <div class="text-sm text-gray-600 order-2 sm:order-1">
+            <span>@(currentSlideIndex + 1)</span> / <span>@slides.Count</span>
         </div>
-    }
-    else
-    {
-        <div class="text-center">
-            <h3 class="text-2xl font-bold text-gray-600">Loading...</h3>
-            <p class="text-gray-500 mt-2">SignalR Connection Status: @(IsConnected ? "Connected" : "Disconnected")</p>
-            <p class="text-gray-500 mt-1">Total Slides: @slides.Count</p>
-            <p class="text-gray-500 mt-1">Current Index: @currentSlideIndex</p>
-            @if (slides.Any())
-            {
-                <p class="text-green-600 mt-2">Slides loaded, but not displaying.</p>
-            }
-            else
-            {
-                <p class="text-red-600 mt-2">Slides could not be loaded!</p>
-            }
+        <div class="flex items-center gap-4 order-1 sm:order-2">
+            <button @onclick="PreviousSlide" disabled="@(currentSlideIndex <= 0)"
+                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                Previous
+            </button>
+            <button @onclick="NextSlide" disabled="@(currentSlideIndex >= slides.Count - 1)"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                Next
+            </button>
         </div>
-    }
-</main>
-
-<footer
-    class="bg-white border-t border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between shadow-md print:hidden gap-4 sm:gap-0">
-    <div class="text-sm text-gray-600 order-2 sm:order-1">
-        <span>@(currentSlideIndex + 1)</span> / <span>@slides.Count</span>
-    </div>
-    <div class="flex items-center gap-4 order-1 sm:order-2">
-        <button @onclick="PreviousSlide" disabled="@(currentSlideIndex <= 0)"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            Previous
-        </button>
-        <button @onclick="NextSlide" disabled="@(currentSlideIndex >= slides.Count - 1)"
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            Next
-        </button>
-    </div>
-    <div class="text-sm text-gray-500 order-3 sm:order-3 text-center sm:text-right hidden">
-        <button @onclick="ToggleNotes"
-            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
-            @(showNotes ? "Hide Notes" : "Show Notes")
-        </button>
-    </div>
-</footer>
+        <div class="text-sm text-gray-500 order-3 sm:order-3 text-center sm:text-right hidden">
+            <button @onclick="ToggleNotes"
+                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                @(showNotes ? "Hide Notes" : "Show Notes")
+            </button>
+        </div>
+    </footer>
+</div>
 
 @code {
     private HubConnection? hubConnection;
     private int currentSlideIndex = 0;
-    private List<SlideData> slides = new();
+    private List<SlideInfo> slides = new();
     private bool showNotes = false;
     private string? apiBaseUrl;
+    private Dictionary<string, object> slideParameters => new() { { "ShowNotes", showNotes } };
 
     protected override async Task OnInitializedAsync()
     {
@@ -143,7 +130,6 @@
             }
         }
     }
-
     private DotNetObjectReference<SlideView>? dotNetHelper;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -175,6 +161,8 @@
         }
     }
 
+    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+
     public async ValueTask DisposeAsync()
     {
         if (hubConnection != null)
@@ -182,12 +170,12 @@
             await hubConnection.DisposeAsync();
         }
         dotNetHelper?.Dispose();
-    }
 
-    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+    }
 
     [Inject]
     NavigationManager NavigationManager { get; set; } = default!;
+
 
     [Inject]
     IJSRuntime JS { get; set; } = default!;

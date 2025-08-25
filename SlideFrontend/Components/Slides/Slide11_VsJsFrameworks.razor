@@ -1,0 +1,42 @@
+@* Slide 11: Blazor vs. JavaScript Frameworks *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">Blazor vs. JavaScript Frameworks</h2>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12">A Strategic Choice for Your Team</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 w-full max-w-5xl">
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Blazor</h3>
+                <p class="text-5xl sm:text-7xl mb-4">🇨#</p>
+                <p class="text-sm sm:text-base">.NET Ecosystem</p>
+                <p class="text-sm sm:text-base">One Technology Stack</p>
+                <p class="text-sm sm:text-base">Strongly-Typed</p>
+            </div>
+            <div class="text-3xl sm=text-5xl font-bold text-gray-400">vs.</div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Vue.js / React</h3>
+                <p class="text-5xl sm:text-7xl mb-4">📜</p>
+                <p class="text-sm sm:text-base">JavaScript Ecosystem</p>
+                <p class="text-sm sm:text-base">Separate Stacks</p>
+                <p class="text-sm sm:text-base">Flexible Typing</p>
+            </div>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>Choosing between Blazor and JavaScript frameworks like Vue.js is not just a technical decision. It's
+                    about choosing the best tool for your team's skills.</p>
+                <p>If a company has a lot of experience with Microsoft tools and C#, then Blazor is a natural choice. It's
+                    an easy and productive choice because they can reuse their skills and code.</p>
+                <p>If a company has strong skills in JavaScript, then a framework like Vue.js is a better choice. The
+                    decision is about matching the technology to the team's strengths.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

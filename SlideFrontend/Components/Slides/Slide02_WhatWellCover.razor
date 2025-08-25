@@ -1,0 +1,30 @@
+@* Slide 2: What We'll Cover *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">What We'll Cover</h2>
+        <ol class="text-left text-xl sm:text-2xl md:text-3xl space-y-4 md:space-y-6">
+            <li class="flex items-center"><span class="text-blue-600 font-bold mr-4">1.</span> What is Blazor?</li>
+            <li class="flex items-center"><span class="text-blue-600 font-bold mr-4">2.</span> Blazor vs. Other Web
+                Technologies</li>
+            <li class="flex items-center"><span class="text-blue-600 font-bold mr-4">3.</span> The Role of Middleware
+            </li>
+            <li class="flex items-center"><span class="text-blue-600 font-bold mr-4">4.</span> The Power of Data Binding
+            </li>
+        </ol>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>We will talk about these four key areas. We'll start with the basics of Blazor. Then, we'll compare it to
+                    other technologies you may know. Finally, we'll look at two key technical ideas—Middleware and Data
+                    Binding—to understand how Blazor apps work.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

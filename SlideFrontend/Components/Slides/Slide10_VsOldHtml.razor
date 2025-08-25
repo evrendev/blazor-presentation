@@ -1,0 +1,36 @@
+@* Slide 10: Blazor vs. Old HTML Pages *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">More Than Just a Static Page</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-5xl">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Static HTML</h3>
+                <p class="text-base md:text-lg text-gray-600">Request → Full Page Reload</p>
+                <p class="mt-4 text-sm sm:text-base">A simple experience where every click reloads the page.</p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border-2 border-blue-500">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Blazor (SPA)</h3>
+                <p class="text-base md:text-lg text-gray-600">Initial Load → Smart UI Updates</p>
+                <p class="mt-4 text-sm sm:text-base">An interactive experience like a desktop app, with no page reloads.
+                </p>
+            </div>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>The difference between Blazor and old HTML sites is very big. Static sites reload the entire page every
+                    time you click a link. The page doesn't remember anything.</p>
+                <p>Blazor is a Single-Page Application (SPA). It loads the app once, then updates the UI without reloading.
+                    This avoids annoying page reloads. Blazor can also remember information, like data in a form, which
+                    allows for a much better user experience.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

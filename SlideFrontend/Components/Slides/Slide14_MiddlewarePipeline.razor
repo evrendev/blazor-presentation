@@ -1,0 +1,35 @@
+@* Slide 14: The Middleware Pipeline in Action *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">How the Request Pipeline Works</h2>
+        <div class="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200">
+            <h3 class="text-xl sm:text-2xl font-semibold mb-6">The Order is Very Important</h3>
+            <ol class="space-y-3 text-base sm:text-lg list-decimal list-inside">
+                <li><code>UseExceptionHandler</code> - Catch errors first.</li>
+                <li><code>UseHttpsRedirection</code> - Use secure connections.</li>
+                <li><code>UseStaticFiles</code> - Serve files like CSS/images (fast).</li>
+                <li><code>UseRouting</code> - Decide where the request goes.</li>
+                <li><code>UseAuthentication</code> - Check <strong>who</strong> the user is.</li>
+                <li><code>UseAuthorization</code> - Check <strong>what</strong> the user can do.</li>
+                <li><code>MapBlazorHub</code> - Connect to the Blazor app.</li>
+            </ol>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>This is a simple view of a middleware pipeline. The order is very important. For example, you must check
+                    who a user is (Authentication) before you check what they can do (Authorization).</p>
+                <p>Middleware also makes things faster by ending the process early. For a simple request for an image, the
+                    Static Files middleware handles it and sends the response. The request doesn't need to go through the
+                    slower security checks, which is very efficient.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

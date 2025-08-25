@@ -1,0 +1,41 @@
+@* Slide 12: Main Differences *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">Main Differences</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 w-full max-w-6xl text-center">
+            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Productivity</h3>
+                <p class="text-sm sm:text-base">Blazor lets .NET teams use C# for everything. This means they write less
+                    repeated code and work faster.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Performance</h3>
+                <p class="text-sm sm:text-base">JS frameworks usually load faster the first time. Blazor WASM is faster
+                    for heavy calculation tasks.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Ecosystem</h3>
+                <p class="text-sm sm:text-base">The JavaScript library ecosystem is very large. Blazor's is smaller but
+                    growing, and can use any standard .NET library.</p>
+            </div>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>To summarize: Blazor's main benefit is productivity for .NET teams, because they can share code and use
+                    one language.</p>
+                <p>For performance, it's a trade-off. JS frameworks are often faster to load. Blazor WebAssembly is faster
+                    for heavy calculations.</p>
+                <p>Finally, the JavaScript ecosystem of libraries is larger, but Blazor can use the entire, massive .NET
+                    library ecosystem, which is a huge advantage.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

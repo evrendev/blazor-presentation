@@ -1,0 +1,49 @@
+@* Slide 15: The Magic of Data Binding *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">The Magic of Data Binding</h2>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12">Keeping UI and Code in Sync Automatically
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 w-full max-w-4xl">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <p class="text-base sm:text-lg font-mono text-blue-700">private string name = "Ulli";</p>
+                <h3 class="text-xl sm:text-2xl font-semibold mt-2">C# Code</h3>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-gray-500 rotate-90 sm:rotate-0">
+                <path d="M18 10h-2.5a2.5 2.5 0 0 0-5 0H8" />
+                <path d="M6 14h2.5a2.5 2.5 0 0 0 5 0H16" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="m2 12 2 0" />
+                <path d="M20 12h2" />
+                <path d="m4.93 19.07 1.41-1.41" />
+                <path d="m17.66 6.34 1.41-1.41" />
+            </svg>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <p class="text-base sm:text-lg font-mono text-green-700">&lt;input value="Ulli" /&gt;</p>
+                <h3 class="text-xl sm:text-2xl font-semibold mt-2">HTML UI</h3>
+            </div>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>Our final topic is Data Binding. This is a key feature of all modern UI frameworks. It's the mechanism
+                    that automatically connects your UI to your data.</p>
+                <p>Without data binding, a developer would have to write extra code to read a value from a variable and show
+                    it in a textbox, and then more code to update the variable when the user types. Data binding does this
+                    automatically.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

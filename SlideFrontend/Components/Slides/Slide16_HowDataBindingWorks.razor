@@ -1,0 +1,73 @@
+@* Slide 16: How Data Binding Works *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">How Data Binding Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-5xl">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">One-Way Connection</h3>
+                <p class="text-base md:text-lg mb-4">Data flows from Code → UI</p>
+                <code
+                    class="bg-gray-100 text-gray-800 p-2 rounded text-sm sm:text-lg">&lt;p&gt;Hello, @@UserName&lt;/p&gt;</code>
+                <p class="mt-4 text-sm sm:text-base">Used for showing data.</p>
+
+                <div class="bg-blue-50 p-4 rounded-lg my-6">
+                    <button @onclick="toggleUserName"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 mb-4">
+                        Toggle Name
+                    </button>
+                    <p class="text-lg mt-2">
+                        Hello,
+                        <strong>@(string.IsNullOrEmpty(userName) ? "Anonymous" : userName)</strong>!
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border-2 border-blue-500">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-4">Two-Way Connection</h3>
+                <p class="text-base md:text-lg mb-4">Data flows both ways: Code ↔ UI</p>
+                <code
+                    class="bg-gray-100 text-gray-800 p-2 rounded text-sm sm:text-lg">&lt;input @@bind="UserName" /&gt;</code>
+                <p class="mt-4 text-sm sm:text-base">Used for user input forms.</p>
+
+                <div class="bg-blue-50 p-4 rounded-lg my-6">
+                    <label class="block text-left text-lg font-semibold mb-2">Your Name:</label>
+                    <input @bind="userName" @bind:event="oninput"
+                        class="w-full p-3 border border-gray-300 rounded-lg text-sm"
+                        placeholder="Type your name here..." />
+
+                    <p class="text-lg mt-2">
+                        Hello,
+                        <strong>@(string.IsNullOrEmpty(userName) ? "Anonymous" : userName)</strong>!
+                    </p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Character count: @userName.Length
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>Blazor has two main types of data binding. <strong>One-way connection</strong> is simple: data flows from
+                    your C# code to the UI. When your code changes a variable, the UI updates. This is used for showing
+                    information.</p>
+                <p><strong>Two-way connection</strong>, using the <code>@@bind</code> command, is more powerful. When the
+                    code changes the variable, the input field updates. When the user types in the input field, the C#
+                    variable updates. This makes building forms much easier and means writing less repetitive code.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+
+    private string userName = "";
+    private void toggleUserName(MouseEventArgs args)
+    {
+        userName = userName == "Alice" ? "Bob" : "Alice";
+    }
+}

@@ -1,0 +1,54 @@
+@* Slide 6: Running on the Server *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">Running on the Server</h2>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12">Example: A Remote-Controlled Car</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-5xl text-center">
+            <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="text-gray-700 mb-4">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="font-semibold text-lg sm:text-xl">Browser (Simple Client)</span>
+            </div>
+            <div class="flex flex-col items-center text-blue-600 font-semibold text-base sm:text-lg">
+                <span>User Clicks →</span>
+                <div class="w-32 sm:w-48 h-1 bg-blue-500 my-2"></div>
+                <div class="w-32 sm:w-48 h-1 bg-gray-400 my-2"></div>
+                <span>← UI Updates</span>
+                <span class="text-xs sm:text-sm mt-2">(SignalR Connection)</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="text-blue-700 mb-4">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span class="font-semibold text-lg sm:text-xl">Server (.NET App)</span>
+                <span class="text-gray-600 text-sm sm:text-base">All logic runs here</span>
+            </div>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>Think of Blazor Server like a remote-controlled car. The car (the user's browser) is simple. All the
+                    smart work happens in the remote control (the server). Commands are sent over a constant, live
+                    connection (a SignalR connection).</p>
+                <p>Technically, the C# code runs on the server. When a user clicks a button, the event is sent to the
+                    server. The server processes it, calculates the UI change, and sends a small update back to the browser.
+                    This is great for security because your code never leaves the server, and the app loads very fast the
+                    first time.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

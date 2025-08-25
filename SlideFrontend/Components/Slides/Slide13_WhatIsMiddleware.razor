@@ -1,0 +1,37 @@
+@* Slide 13: What is Middleware? *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">What is Middleware?</h2>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12">An ASP.NET Core Idea: A Security
+            Checkpoint</p>
+        <div
+            class="flex items-center justify-center w-full max-w-6xl bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200">
+            <span class="text-base sm:text-xl font-bold hidden sm:block">Request →</span>
+            <div class="flex-grow flex flex-wrap justify-center items-center gap-2 mx-2 sm:mx-4 p-2">
+                <div class="bg-gray-200 px-3 py-1 rounded-full text-xs sm:text-sm">Logging</div>
+                <div class="bg-gray-200 px-3 py-1 rounded-full text-xs sm:text-sm">Authentication</div>
+                <div class="bg-gray-200 px-3 py-1 rounded-full text-xs sm:text-sm">Authorization</div>
+                <div class="bg-gray-200 px-3 py-1 rounded-full text-xs sm:text-sm">Routing</div>
+            </div>
+            <span class="text-base sm:text-xl font-bold hidden sm:block">→ Your App Code</span>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>Middleware is not a Blazor-specific feature. It's a basic and important pattern in ASP.NET Core, the
+                    framework that runs Blazor Server apps.</p>
+                <p>The best example is a series of security checkpoints. A request to your app is like a person trying to
+                    enter a secure building. They must go through a series of checks in a specific order. Each check is a
+                    piece of middleware. One check might look for errors, another might check security. Each check looks at
+                    the request and decides if it can continue.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

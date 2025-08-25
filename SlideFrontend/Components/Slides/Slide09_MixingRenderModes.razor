@@ -1,0 +1,39 @@
+@* Slide 9: The Next Step: Mixing Render Modes *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">The Next Step: Mixing Render Modes</h2>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12">With .NET 8, you can use both.</p>
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200 w-full max-w-4xl">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-center">Blazor Web App (.NET 8+)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-base md:text-xl">
+                <div class="bg-gray-100 p-4 rounded"><strong>Static:</strong> For simple content pages.</div>
+                <div class="bg-blue-100 p-4 rounded"><strong>Interactive Server:</strong> The classic Server model.
+                </div>
+                <div class="bg-green-100 p-4 rounded"><strong>Interactive WASM:</strong> The classic WebAssembly model.
+                </div>
+                <div class="bg-purple-100 p-4 rounded"><strong>Interactive Auto:</strong> Server first, then WASM.</div>
+            </div>
+            <p class="text-center mt-6 text-base sm:text-lg md:text-xl text-gray-700">Choose the best render mode
+                <strong>for each page or component</strong>.</p>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>The choice between Server and WASM was a problem in older versions. The new Blazor Web App model in .NET
+                    8 solves this. It brings the models together and lets a developer choose the render mode for each part
+                    of the page.</p>
+                <p>For example, a public landing page can be static for fast loading, while a complex dashboard can use
+                    WebAssembly. The "Auto" mode is very smart: it loads the page instantly using the Server model, while
+                    downloading the WebAssembly parts in the background for next time. This gives you the best parts of both
+                    models.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

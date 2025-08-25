@@ -1,0 +1,33 @@
+@* Slide 18: Summary *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">Summary</h2>
+        <div class="text-left text-lg sm:text-xl md:text-2xl space-y-4 md:space-y-6 max-w-4xl">
+            <p><span class="text-blue-600 mr-4 mt-1">✓</span> <strong>Blazor</strong> lets you
+                build web apps with C# and has flexible ways to run them (Server &amp; WASM).</p>
+            <p><span class="text-blue-600 mr-4 mt-1">✓</span> It's a <strong>smart choice for
+                    .NET teams</strong>, making work faster by using one set of technologies.</p>
+            <p><span class="text-blue-600 mr-4 mt-1">✓</span> <strong>Middleware</strong> is a
+                key part of ASP.NET Core that handles requests for security and performance.</p>
+            <p><span class="text-blue-600 mr-4 mt-1">✓</span> <strong>Data Binding</strong>
+                automatically keeps the UI updated, which makes development simpler.</p>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>To summarize: Blazor is a great framework for building modern web apps with C#. It offers flexible
+                    choices to fit different needs.</p>
+                <p>Its main advantage is for teams already using .NET, where it makes work faster.</p>
+                <p>We also saw that core ideas like Middleware are important for building secure apps, and features like
+                    Data Binding make creating user interfaces much simpler.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}

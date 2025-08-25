@@ -1,0 +1,59 @@
+@* Slide 8: Server vs. WebAssembly (WASM) *@
+<div class="slide w-full h-full flex flex-col justify-center items-center text-center p-4 md:p-8 bg-gray-100">
+    <div class="slide-content flex-grow flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">Server vs. WebAssembly (WASM)</h2>
+        <div class="w-full max-w-5xl bg-white p-4 sm:p-8 rounded-lg shadow-lg border border-gray-200">
+            <table class="w-full text-left text-sm sm:text-lg md:text-xl responsive-table">
+                <thead>
+                    <tr class="border-b-2 border-gray-300">
+                        <th class="py-2 sm:py-3 px-2">Feature</th>
+                        <th class="py-2 sm:py-3 px-2 text-center">Blazor Server</th>
+                        <th class="py-2 sm:py-3 px-2 text-center">Blazor WebAssembly</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200">
+                        <td data-label="Feature" class="py-2 sm:py-3 px-2 font-semibold">Initial Load</td>
+                        <td data-label="Blazor Server" class="py-3 px-2 text-center text-green-600">Fast</td>
+                        <td data-label="Blazor WebAssembly" class="py-3 px-2 text-center text-orange-500">Slower</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td data-label="Feature" class="py-2 sm:py-3 px-2 font-semibold">User Interaction</td>
+                        <td data-label="Blazor Server" class="py-3 px-2 text-center text-orange-500">Slower</td>
+                        <td data-label="Blazor WebAssembly" class="py-3 px-2 text-center text-green-600">Very Fast</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td data-label="Feature" class="py-2 sm:py-3 px-2 font-semibold">Offline Support</td>
+                        <td data-label="Blazor Server" class="py-3 px-2 text-center text-red-600">No</td>
+                        <td data-label="Blazor WebAssembly" class="py-3 px-2 text-center text-green-600">Yes</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td data-label="Feature" class="py-2 sm:py-3 px-2 font-semibold">Security (App Code)</td>
+                        <td data-label="Blazor Server" class="py-3 px-2 text-center text-green-600">High</td>
+                        <td data-label="Blazor WebAssembly" class="py-3 px-2 text-center text-orange-500">Lower</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature" class="py-2 sm:py-3 px-2 font-semibold">Best For</td>
+                        <td data-label="Blazor Server" class="py-3 px-2 text-center">Internal Company Apps</td>
+                        <td data-label="Blazor WebAssembly" class="py-3 px-2 text-center">Public Apps, Offline Apps</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @if (ShowNotes)
+    {
+        <div
+            class="speaker-notes w-full max-w-7xl mt-8 p-6 bg-white border-t-4 border-blue-500 rounded-lg shadow-xl text-left overflow-y-auto max-h-64">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Speaker Notes</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>This table shows the main differences. There is no single "best" model. The best choice depends on what
+                    the app needs to do. Blazor Server is great for internal company apps where security is very important.
+                    Blazor WebAssembly is great for public apps that need to be very fast and work offline.</p>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public bool ShowNotes { get; set; } = false;
+}
